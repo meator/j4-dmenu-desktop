@@ -154,8 +154,7 @@ public:
                     break;
                 case "OnlyShowIn"_istr:
                     if(environment) {
-                        stringlist_t values;
-                        split(std::string(value), ';', values);
+                        stringlist_t values = split(std::string(value), ';');
                         if(!have_equal_element(*environment, values)) {
                             hidden = true;
 #ifdef DEBUG
@@ -166,8 +165,7 @@ public:
                     break;
                 case "NotShowIn"_istr:
                     if(environment) {
-                        stringlist_t values;
-                        split(std::string(value), ';', values);
+                        stringlist_t values = split(std::string(value), ';');
                         if(have_equal_element(*environment, values)) {
                             hidden = true;
 #ifdef DEBUG
