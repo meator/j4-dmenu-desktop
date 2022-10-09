@@ -69,6 +69,8 @@ public:
     // It isn't set by Application, it is a helper variable managed by Applications
     std::string id;
 
+    stringlist_t categories;
+
     bool operator==(const Application & other) const
     {
         return name == other.name && generic_name == other.generic_name && exec == other.exec && path == other.path
@@ -139,6 +141,8 @@ public:
                         this->exec = expand("Exec", value);
                     else if (strcmp(key, "Path") == 0)
                         this->path = expand("Path", value);
+                    else if (strcmp(key, "Categories") == 0)
+                        this->categories = expandlist("Categories", value);
                     else if (strcmp(key, "OnlyShowIn") == 0) {
                         if(!desktopenvs.empty()) {
                             stringlist_t values = expandlist("OnlyShowIn", value);

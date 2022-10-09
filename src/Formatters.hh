@@ -35,6 +35,22 @@ inline std::string appformatter_with_binary_name(const Application &app)
     return app.name + " (" + app.exec.substr(0, app.exec.find(' ')) + ")";
 }
 
+inline std::string appformatter_with_categories(const Application &app)
+{
+    if (app.categories.empty())
+        return appformatter_default(app);
+    std::string result = app.name + " (";
+    bool first = true;
+    for (const auto & i : app.categories) {
+        if (!first)
+            result += ", ";
+        result += i;
+        first = false;
+    }
+    result += ')';
+    return result;
+}
+
 std::string appformatter_with_base_binary_name(const Application &app)
 {
     auto command_end = app.exec.find(' ');

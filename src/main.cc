@@ -46,6 +46,8 @@ void print_usage(FILE* f) {
             "\t\tDisplay binary name after each entry (off by default)\n"
             "\t-f, --display-binary-base\n"
             "\t\tDisplay basename of binary name after each entry (off by default)\n"
+            "\t-c, --display-categories\n"
+            "\t\tDisplay categories of desktop entry after each entry (off by default)\n"
             "\t-d, --dmenu=<command>\n"
             "\t\tDetermines the command used to invoke dmenu\n"
             "\t\tExecuted with your shell ($SHELL) or /bin/sh\n"
@@ -276,6 +278,7 @@ int main(int argc, char **argv)
             {"help",                no_argument,       0,  'h'},
             {"display-binary",      no_argument,       0,  'b'},
             {"display-binary-base", no_argument,       0,  'f'},
+            {"display-categories",  no_argument,       0,  'c'},
             {"no-generic",          no_argument,       0,  'n'},
             {"usage-log",           required_argument, 0,  'l'},
             {"wait-on",             required_argument, 0,  'w'},
@@ -284,7 +287,7 @@ int main(int argc, char **argv)
             {0,                     0,                 0,  0}
         };
 
-        int c = getopt_long(argc, argv, "d:t:xhbf", long_options, &option_index);
+        int c = getopt_long(argc, argv, "d:t:xhbfc", long_options, &option_index);
         if(c == -1)
             break;
 
@@ -306,6 +309,9 @@ int main(int argc, char **argv)
             break;
         case 'f':
             appformatter = appformatter_with_base_binary_name;
+            break;
+        case 'c':
+            appformatter = appformatter_with_categories;
             break;
         case 'n':
             exclude_generic = true;
